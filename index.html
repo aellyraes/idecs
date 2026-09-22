@@ -35,7 +35,7 @@
             font-family: 'Fira Code', monospace;
         }
 
-        /* Tech Cyber Grid Overlay */
+        /* Tech Cyber Grid Background Overlay */
         .tech-grid {
             background-size: 50px 50px;
             background-image: 
@@ -94,9 +94,8 @@
             background-color: #ffffff;
         }
 
-        /* Focus highlight for TV / Keyboard Navigation */
-        [data-focusable="true"]:focus,
-        [data-focusable="true"].remote-focus {
+        /* Focus highlight for TV Remote / Keyboard Navigation */
+        [data-focusable="true"]:focus {
             outline: 3px solid #000000 !important;
             outline-offset: 3px !important;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
@@ -111,47 +110,22 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 100, 100, 0.3);
         }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #2a0000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ff3344;
-            border-radius: 4px;
-        }
     </style>
 </head>
 <body class="relative flex flex-col justify-between items-center min-h-screen px-4 py-6 selection:bg-red-500 selection:text-white">
 
-    <!-- AI Canvas Background Animation -->
+    <!-- AI Canvas Animation -->
     <canvas id="aiDatabaseCanvas"></canvas>
 
     <!-- Animated Tech Grid Overlay -->
     <div class="fixed inset-0 tech-grid pointer-events-none z-0 opacity-40"></div>
 
-    <!-- Top Admin Settings Trigger -->
-    <div class="fixed top-4 right-4 z-40">
-        <button id="openConfigBtn" 
-                data-focusable="true" 
-                onclick="toggleConfigModal(true)" 
-                title="Customize Hub Settings"
-                aria-label="Customize Hub Settings"
-                class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white font-bold w-11 h-11 rounded-full shadow-2xl flex items-center justify-center border border-red-300/40 backdrop-blur-md transition-all">
-            <i class="fa-solid fa-sliders text-white text-base"></i>
-        </button>
-    </div>
-
-    <!-- Main App Container -->
+    <!-- Main Container -->
     <main class="w-full max-w-md mx-auto flex flex-col items-center text-center space-y-6 my-auto pt-4 pb-16 relative z-10">
         
-        <!-- Logo Display Box -->
-        <div class="relative group mx-auto mb-1 cursor-pointer" onclick="document.getElementById('directLogoInput').click()" title="Click to Upload Logo" data-focusable="true">
-            <input type="file" id="directLogoInput" accept="image/*" class="hidden" onchange="handleLogoFileUpload(event)">
-            <div class="absolute -inset-1 bg-gradient-to-r from-red-500 via-rose-500 to-amber-500 rounded-3xl blur-md opacity-60 group-hover:opacity-100 transition duration-500"></div>
+        <!-- Logo Box -->
+        <div class="relative group mx-auto mb-1">
+            <div class="absolute -inset-1 bg-gradient-to-r from-red-500 via-rose-500 to-amber-500 rounded-3xl blur-md opacity-60"></div>
             <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl overflow-hidden border-2 border-red-200/60 bg-white/95 backdrop-blur-md flex items-center justify-center p-4 shadow-2xl">
                 <!-- Repository Reference logo.png -->
                 <img id="displayAvatar" src="logo.png" alt="SAINS Logo" class="w-full h-full object-contain p-1 rounded-2xl" onerror="handleAvatarError()">
@@ -172,33 +146,57 @@
                         <text x="70" y="118" font-family="'Inter', sans-serif" font-weight="900" font-size="24" fill="#0d0d0d" text-anchor="middle" letter-spacing="-1">sains</text>
                     </svg>
                 </div>
-                
-                <!-- Hover Overlay -->
-                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-2 text-center rounded-3xl">
-                    <i class="fa-solid fa-camera text-2xl mb-1 text-red-400"></i>
-                    <span class="text-[11px] font-bold">Upload Logo</span>
-                </div>
             </div>
         </div>
 
-        <!-- Title & Tagline -->
+        <!-- Title & Exact Tagline Request -->
         <div class="space-y-2 px-2">
-            <h1 id="displayTitle" class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white drop-shadow-md uppercase">
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white drop-shadow-md uppercase">
                 Sarawak Information Systems (SAINS)
             </h1>
-            <p id="displayTagline" class="text-sm text-red-100/90 leading-relaxed pt-1 max-w-sm mx-auto font-medium">
+            <p class="text-sm sm:text-base text-red-100/90 leading-relaxed pt-1 max-w-sm mx-auto font-medium tracking-wide">
                 Digital Partners For Life
             </p>
         </div>
 
         <!-- Social Bar -->
-        <div id="socialContainer" class="flex items-center justify-center gap-4 text-xl sm:text-2xl pt-1">
-            <!-- Dynamically populated -->
+        <div class="flex items-center justify-center gap-4 text-xl sm:text-2xl pt-1">
+            <a href="https://www.facebook.com/sainssarawak" target="_blank" data-focusable="true" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-red-300/30 flex items-center justify-center text-white transition-all shadow-md">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/sainssarawak" target="_blank" data-focusable="true" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-red-300/30 flex items-center justify-center text-white transition-all shadow-md">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.sains.com.my" target="_blank" data-focusable="true" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-red-300/30 flex items-center justify-center text-white transition-all shadow-md">
+                <i class="fa-solid fa-globe"></i>
+            </a>
         </div>
 
-        <!-- 6 Requested Feature Boxes -->
-        <div id="linksContainer" class="w-full space-y-4 pt-2 px-2">
-            <!-- Dynamically populated via JS -->
+        <!-- Exact 6 Requested Feature Boxes -->
+        <div class="w-full space-y-4 pt-2 px-2">
+            <button onclick="handleLinkExecution('Holobox (interactive AI Assistance)', '#holobox-backend')" data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center">
+                <h3 class="font-extrabold text-sm sm:text-base tracking-wide leading-snug">Holobox (interactive AI Assistance)</h3>
+            </button>
+
+            <button onclick="handleLinkExecution('S-Nexus', '#s-nexus-backend')" data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center">
+                <h3 class="font-extrabold text-sm sm:text-base tracking-wide leading-snug">S-Nexus</h3>
+            </button>
+
+            <button onclick="handleLinkExecution('Sovereign AI Infrastructure', '#sovereign-ai-backend')" data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center">
+                <h3 class="font-extrabold text-sm sm:text-base tracking-wide leading-snug">Sovereign AI Infrastructure</h3>
+            </button>
+
+            <button onclick="handleLinkExecution('The Future Sarawak Net', '#future-sarawak-net-backend')" data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center">
+                <h3 class="font-extrabold text-sm sm:text-base tracking-wide leading-snug">The Future Sarawak Net</h3>
+            </button>
+
+            <button onclick="handleLinkExecution('Unity IoT Platform', '#unity-iot-backend')" data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center">
+                <h3 class="font-extrabold text-sm sm:text-base tracking-wide leading-snug">Unity IoT Platform</h3>
+            </button>
+
+            <button onclick="handleLinkExecution('Neptune Studio', '#neptune-studio-backend')" data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center">
+                <h3 class="font-extrabold text-sm sm:text-base tracking-wide leading-snug">Neptune Studio</h3>
+            </button>
         </div>
 
         <!-- Footer -->
@@ -207,7 +205,7 @@
         </footer>
     </main>
 
-    <!-- Interactive Execution Modal -->
+    <!-- Modal Output Target -->
     <div id="itemModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
         <div class="glass-panel w-full max-w-lg rounded-3xl p-6 space-y-4 relative shadow-2xl border border-red-500/40">
             <button onclick="closeModal('itemModal')" data-focusable="true" class="absolute top-4 right-4 w-9 h-9 bg-red-950 hover:bg-red-800 rounded-full flex items-center justify-center text-white border border-red-500/40">
@@ -230,226 +228,29 @@
         </div>
     </div>
 
-    <!-- Settings & Customization Modal -->
-    <div id="configModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 space-y-4 relative shadow-2xl border border-red-500/50 max-h-[90vh] overflow-y-auto">
-            <button onclick="toggleConfigModal(false)" data-focusable="true" class="absolute top-4 right-4 w-9 h-9 bg-red-950 hover:bg-red-800 rounded-full flex items-center justify-center text-white border border-red-500/40">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <h3 class="font-extrabold text-xl text-white flex items-center gap-2">
-                <i class="fa-solid fa-sliders text-red-400"></i>
-                Customize Portal Settings
-            </h3>
-
-            <form onsubmit="saveConfiguration(event)" class="space-y-4 text-xs font-sans text-left">
-                <div>
-                    <label class="block text-red-200 font-semibold mb-1">Company Title</label>
-                    <input type="text" id="cfgTitle" class="w-full bg-black/60 border border-red-800 rounded-xl px-3 py-2 text-white focus:border-red-500 focus:outline-none">
-                </div>
-                <div>
-                    <label class="block text-red-200 font-semibold mb-1">Tagline</label>
-                    <input type="text" id="cfgTagline" class="w-full bg-black/60 border border-red-800 rounded-xl px-3 py-2 text-white focus:border-red-500 focus:outline-none">
-                </div>
-                <div>
-                    <label class="block text-red-200 font-semibold mb-1">Logo URL / Image Path</label>
-                    <div class="flex items-center gap-2">
-                        <input type="text" id="cfgAvatar" placeholder="logo.png" class="flex-grow bg-black/60 border border-red-800 rounded-xl px-3 py-2 text-white focus:border-red-500 focus:outline-none">
-                        <label data-focusable="true" class="px-3 py-2 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white rounded-xl cursor-pointer text-xs font-semibold whitespace-nowrap flex items-center gap-1.5 shadow-md">
-                            <i class="fa-solid fa-upload"></i> Upload
-                            <input type="file" accept="image/*" class="hidden" onchange="handleLogoFileUpload(event)">
-                        </label>
-                    </div>
-                </div>
-
-                <div class="pt-2 border-t border-red-900/60">
-                    <label class="block text-red-200 font-semibold mb-2">Manage Module Links</label>
-                    <div id="linksConfigList" class="space-y-2">
-                        <!-- Populated dynamically -->
-                    </div>
-                </div>
-
-                <div class="pt-4 flex items-center justify-between">
-                    <button type="button" onclick="resetDefaults()" data-focusable="true" class="px-4 py-2 bg-slate-900 text-red-300 border border-red-800 rounded-xl hover:bg-slate-800">
-                        Reset Defaults
-                    </button>
-                    <button type="submit" data-focusable="true" class="px-6 py-2.5 bg-gradient-to-r from-red-600 to-red-800 text-white font-bold rounded-xl shadow-lg hover:from-red-500 hover:to-red-700">
-                        Save Changes
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-6 z-50 hidden bg-red-950 border border-red-500/80 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 text-xs font-mono">
-        <i class="fa-solid fa-circle-check text-red-400 text-lg"></i>
-        <span id="toastMsg">Action updated.</span>
-    </div>
-
     <!-- Core Script -->
     <script>
-        const DEFAULT_DATA = {
-            title: "Sarawak Information Systems (SAINS)",
-            tagline: "Digital Partners For Life",
-            avatarUrl: "logo.png",
-            socials: [
-                { name: "Facebook", icon: "fa-brands fa-facebook", url: "https://www.facebook.com/sainssarawak" },
-                { name: "Instagram", icon: "fa-brands fa-instagram", url: "https://www.instagram.com/sainssarawak" },
-                { name: "Website", icon: "fa-solid fa-globe", url: "https://www.sains.com.my" }
-            ],
-            links: [
-                { id: "holobox", title: "Holobox (interactive AI Assistance)", url: "#holobox-backend" },
-                { id: "s-nexus", title: "S-Nexus", url: "#snexus-backend" },
-                { id: "sovereign-ai", title: "Sovereign AI Infrastructure", url: "#sovereign-ai-backend" },
-                { id: "future-sarawak-net", title: "The Future Sarawak Net", url: "#future-sarawak-net-backend" },
-                { id: "unity-iot", title: "Unity IoT Platform", url: "#unity-iot-backend" },
-                { id: "neptune-studio", title: "Neptune Studio", url: "#neptune-studio-backend" }
-            ]
-        };
-
-        let currentConfig = JSON.parse(localStorage.getItem('sains_hub_config')) || DEFAULT_DATA;
-        let currentFocusIndex = 0;
+        // Clear old browser local storage cache to ensure clean updates
+        localStorage.removeItem('sains_hub_config');
 
         window.onload = function() {
-            renderHubContent();
             initAiCanvasAnimation();
             initKeyboardNavigation();
         };
-
-        function renderHubContent() {
-            document.getElementById('displayTitle').innerText = currentConfig.title;
-            document.getElementById('displayTagline').innerText = currentConfig.tagline;
-
-            const avatarImg = document.getElementById('displayAvatar');
-            const svgFallback = document.getElementById('svgLogoFallback');
-            if (currentConfig.avatarUrl && currentConfig.avatarUrl.trim() !== '') {
-                avatarImg.src = currentConfig.avatarUrl;
-                avatarImg.classList.remove('hidden');
-                svgFallback.classList.add('hidden');
-            } else {
-                avatarImg.classList.add('hidden');
-                svgFallback.classList.remove('hidden');
-            }
-
-            const socialContainer = document.getElementById('socialContainer');
-            socialContainer.innerHTML = currentConfig.socials.map(s => `
-                <a href="${s.url}" target="_blank" data-focusable="true" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-red-300/30 flex items-center justify-center text-white transition-all shadow-md">
-                    <i class="${s.icon}"></i>
-                </a>
-            `).join('');
-
-            const linksContainer = document.getElementById('linksContainer');
-            linksContainer.innerHTML = currentConfig.links.map(link => `
-                <button onclick="handleLinkExecution('${link.title}', '${link.url}')" data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center group">
-                    <h3 class="font-extrabold text-sm sm:text-base tracking-wide leading-snug">${link.title}</h3>
-                </button>
-            `).join('');
-
-            updateFocusables();
-        }
 
         function handleAvatarError() {
             document.getElementById('displayAvatar').classList.add('hidden');
             document.getElementById('svgLogoFallback').classList.remove('hidden');
         }
 
-        function handleLogoFileUpload(event) {
-            const file = event.target.files && event.target.files[0];
-            if (!file) return;
-
-            if (file.size > 3 * 1024 * 1024) {
-                showToast("File size must be under 3MB.");
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const dataUrl = e.target.result;
-                currentConfig.avatarUrl = dataUrl;
-                localStorage.setItem('sains_hub_config', JSON.stringify(currentConfig));
-                
-                const cfgAvatarInput = document.getElementById('cfgAvatar');
-                if (cfgAvatarInput) cfgAvatarInput.value = dataUrl;
-
-                renderHubContent();
-                showToast("Logo updated successfully!");
-            };
-            reader.readAsDataURL(file);
-        }
-
         function handleLinkExecution(title, targetUrl) {
-            if (targetUrl && !targetUrl.startsWith('#')) {
-                window.open(targetUrl, '_blank');
-            } else {
-                document.getElementById('modalTitle').innerText = title;
-                document.getElementById('modalContent').innerText = `// Executing backend service request for: ${title}\n// Target Endpoint: ${targetUrl}`;
-                openModal('itemModal');
-            }
-        }
-
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.remove('hidden');
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalContent').innerText = `// Executing backend service request for: ${title}\n// Target Endpoint: ${targetUrl}`;
+            document.getElementById('itemModal').classList.remove('hidden');
         }
 
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
-        }
-
-        function toggleConfigModal(show) {
-            const modal = document.getElementById('configModal');
-            if (show) {
-                document.getElementById('cfgTitle').value = currentConfig.title;
-                document.getElementById('cfgTagline').value = currentConfig.tagline;
-                document.getElementById('cfgAvatar').value = currentConfig.avatarUrl || '';
-                
-                const linksList = document.getElementById('linksConfigList');
-                linksList.innerHTML = currentConfig.links.map((link, idx) => `
-                    <div class="space-y-1 p-2 bg-black/40 rounded-xl border border-red-900/40">
-                        <input type="text" value="${link.title}" onchange="updateLinkTitle(${idx}, this.value)" placeholder="Box Title" class="w-full bg-black/60 border border-red-800 rounded-lg px-2 py-1 text-white text-xs mb-1">
-                        <input type="text" value="${link.url}" onchange="updateLinkUrl(${idx}, this.value)" placeholder="Target Link / Endpoint" class="w-full bg-black/60 border border-red-800 rounded-lg px-2 py-1 text-white text-xs">
-                    </div>
-                `).join('');
-
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
-        }
-
-        function updateLinkTitle(index, val) {
-            currentConfig.links[index].title = val;
-        }
-
-        function updateLinkUrl(index, val) {
-            currentConfig.links[index].url = val;
-        }
-
-        function saveConfiguration(e) {
-            e.preventDefault();
-            currentConfig.title = document.getElementById('cfgTitle').value;
-            currentConfig.tagline = document.getElementById('cfgTagline').value;
-            currentConfig.avatarUrl = document.getElementById('cfgAvatar').value;
-
-            localStorage.setItem('sains_hub_config', JSON.stringify(currentConfig));
-            renderHubContent();
-            toggleConfigModal(false);
-            showToast("Settings saved successfully!");
-        }
-
-        function resetDefaults() {
-            currentConfig = JSON.parse(JSON.stringify(DEFAULT_DATA));
-            localStorage.removeItem('sains_hub_config');
-            renderHubContent();
-            toggleConfigModal(false);
-            showToast("Reset to standard defaults.");
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('hidden'), 3000);
         }
 
         function initAiCanvasAnimation() {
@@ -523,6 +324,7 @@
         }
 
         let focusables = [];
+        let currentFocusIndex = 0;
 
         function updateFocusables() {
             focusables = Array.from(document.querySelectorAll('[data-focusable="true"]:not(.hidden)'));
@@ -549,7 +351,6 @@
                     }
                 } else if (e.key === 'Escape') {
                     closeModal('itemModal');
-                    toggleConfigModal(false);
                 }
             });
         }
