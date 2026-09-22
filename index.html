@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SAINS</title>
+    <title>SAINS - Digital Partners For Life</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons CDN -->
@@ -19,7 +19,6 @@
             --btn-bg: #ffffff;
             --btn-text: #800000;
             --btn-border: #ff3344;
-            --neon-gold: #ffd700;
         }
 
         body {
@@ -36,7 +35,7 @@
             font-family: 'Fira Code', monospace;
         }
 
-        /* Tech Cyber Grid Background Overlay */
+        /* Tech Cyber Grid Overlay */
         .tech-grid {
             background-size: 50px 50px;
             background-image: 
@@ -50,7 +49,7 @@
             100% { background-position: 50px 50px; }
         }
 
-        /* Canvas for AI & Database Animations */
+        /* Canvas for AI Animation */
         #aiDatabaseCanvas {
             position: fixed;
             top: 0;
@@ -61,7 +60,7 @@
             z-index: 1;
         }
 
-        /* Sleek High-Contrast Action Buttons */
+        /* Action Buttons */
         .beacons-btn-red {
             background-color: var(--btn-bg);
             color: var(--btn-text);
@@ -95,7 +94,7 @@
             background-color: #ffffff;
         }
 
-        /* CRITICAL: TV Remote / DPAD Focus Visual Highlights - Soft Dark Theme */
+        /* Focus highlight for TV / Keyboard Navigation */
         [data-focusable="true"]:focus,
         [data-focusable="true"].remote-focus {
             outline: 3px solid #000000 !important;
@@ -103,28 +102,14 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
             transform: scale(1.03) translateY(-2px) !important;
             z-index: 30 !important;
-            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease, outline 0.35s ease;
         }
 
-        /* Glassmorphism Card Overlay */
+        /* Glassmorphism Panel */
         .glass-panel {
             background: rgba(30, 0, 5, 0.82);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 100, 100, 0.3);
-        }
-
-        /* TV Safe margins for 10ft Smart TV viewing */
-        @media (min-width: 1280px) {
-            .tv-container {
-                max-width: 580px;
-                padding-top: 2rem;
-                padding-bottom: 4rem;
-            }
-            .tv-btn-text {
-                font-size: 1.15rem;
-                letter-spacing: 0.05em;
-            }
         }
 
         /* Custom Scrollbar */
@@ -142,18 +127,13 @@
 </head>
 <body class="relative flex flex-col justify-between items-center min-h-screen px-4 py-6 selection:bg-red-500 selection:text-white">
 
-    <!-- AI & Database Canvas Animation Overlay -->
+    <!-- AI Canvas Background Animation -->
     <canvas id="aiDatabaseCanvas"></canvas>
 
     <!-- Animated Tech Grid Overlay -->
     <div class="fixed inset-0 tech-grid pointer-events-none z-0 opacity-40"></div>
 
-    <!-- SAINS Building Transparent Overlay Layer -->
-    <div id="buildingLayerContainer" class="fixed inset-0 pointer-events-none z-0 flex items-end justify-center overflow-hidden opacity-30">
-        <img id="displayBuildingImg" src="" alt="SAINS Building" class="max-h-[70vh] w-auto object-contain transition-all duration-700 hidden filter drop-shadow-[0_0_25px_rgba(255,51,68,0.4)]">
-    </div>
-
-    <!-- Top Admin Settings Button (Icon Only) -->
+    <!-- Top Admin Settings Trigger -->
     <div class="fixed top-4 right-4 z-40">
         <button id="openConfigBtn" 
                 data-focusable="true" 
@@ -165,23 +145,22 @@
         </button>
     </div>
 
-    <!-- Main Link-in-Bio / Smart TV Container -->
-    <main class="w-full max-w-md tv-container mx-auto flex flex-col items-center text-center space-y-6 my-auto pt-4 pb-16 relative z-10">
+    <!-- Main App Container -->
+    <main class="w-full max-w-md mx-auto flex flex-col items-center text-center space-y-6 my-auto pt-4 pb-16 relative z-10">
         
-        <!-- Logo Container - Squircle Frame -->
-        <div class="relative group mx-auto mb-1 cursor-pointer" onclick="document.getElementById('directLogoInput').click()" title="Click to Upload & Change Logo" data-focusable="true">
+        <!-- Logo Display Box -->
+        <div class="relative group mx-auto mb-1 cursor-pointer" onclick="document.getElementById('directLogoInput').click()" title="Click to Upload Logo" data-focusable="true">
             <input type="file" id="directLogoInput" accept="image/*" class="hidden" onchange="handleLogoFileUpload(event)">
             <div class="absolute -inset-1 bg-gradient-to-r from-red-500 via-rose-500 to-amber-500 rounded-3xl blur-md opacity-60 group-hover:opacity-100 transition duration-500"></div>
             <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl overflow-hidden border-2 border-red-200/60 bg-white/95 backdrop-blur-md flex items-center justify-center p-4 shadow-2xl">
-                <!-- Direct logo.png reference from repository -->
+                <!-- Repository Reference logo.png -->
                 <img id="displayAvatar" src="logo.png" alt="SAINS Logo" class="w-full h-full object-contain p-1 rounded-2xl" onerror="handleAvatarError()">
                 
-                <!-- Fallback Vector SAINS Logo -->
+                <!-- Fallback Vector Logo -->
                 <div id="svgLogoFallback" class="w-full h-full flex items-center justify-center text-slate-900 hidden">
                     <svg class="w-full h-full" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g transform="translate(18, 8) scale(0.72)">
                             <path d="M 45 5 C 20 5 5 25 5 50 C 5 75 25 95 50 95 C 65 95 75 85 85 70 C 75 55 65 45 50 45 C 35 45 25 55 25 65 C 25 72 30 78 40 78 C 30 78 20 70 20 55 C 20 35 35 20 50 20 C 65 20 75 35 85 50 C 95 65 105 80 120 80 C 135 80 145 65 145 45 C 145 20 125 5 100 5 C 80 5 70 20 60 35 C 70 45 80 55 95 55 C 110 55 120 45 120 35 C 120 28 115 22 105 22 C 115 22 125 30 125 45 C 125 60 115 70 100 70 C 85 70 75 55 65 40 C 55 20 45 5 45 5 Z" fill="url(#sainsRedGrad)"/>
-                            <path d="M 35 30 C 25 40 20 50 20 60 C 20 50 30 35 45 25 C 38 25 35 28 35 30 Z" fill="#1a1a1a"/>
                             <defs>
                                 <linearGradient id="sainsRedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" stop-color="#e60012"/>
@@ -191,11 +170,10 @@
                             </defs>
                         </g>
                         <text x="70" y="118" font-family="'Inter', sans-serif" font-weight="900" font-size="24" fill="#0d0d0d" text-anchor="middle" letter-spacing="-1">sains</text>
-                        <ellipse cx="103" cy="100" rx="4" ry="2.8" fill="#e60012"/>
                     </svg>
                 </div>
                 
-                <!-- Hover Upload Badge -->
+                <!-- Hover Overlay -->
                 <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-2 text-center rounded-3xl">
                     <i class="fa-solid fa-camera text-2xl mb-1 text-red-400"></i>
                     <span class="text-[11px] font-bold">Upload Logo</span>
@@ -203,34 +181,33 @@
             </div>
         </div>
 
-        <!-- Company Header Details -->
+        <!-- Title & Tagline -->
         <div class="space-y-2 px-2">
             <h1 id="displayTitle" class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white drop-shadow-md uppercase">
                 Sarawak Information Systems (SAINS)
             </h1>
-            <p id="displayTagline" class="text-xs sm:text-sm text-red-100/90 leading-relaxed pt-1 max-w-sm mx-auto font-light">
-                Digital Partners For Life 
+            <p id="displayTagline" class="text-sm text-red-100/90 leading-relaxed pt-1 max-w-sm mx-auto font-medium">
+                Digital Partners For Life
             </p>
         </div>
 
-        <!-- Social Icons Bar -->
+        <!-- Social Bar -->
         <div id="socialContainer" class="flex items-center justify-center gap-4 text-xl sm:text-2xl pt-1">
-            <!-- Social links dynamically populated via JavaScript -->
+            <!-- Dynamically populated -->
         </div>
 
-        <!-- Dynamic Action Buttons (DPAD Focusable) -->
+        <!-- 6 Requested Feature Boxes -->
         <div id="linksContainer" class="w-full space-y-4 pt-2 px-2">
-            <!-- 6 requested buttons generated here dynamically -->
+            <!-- Dynamically populated via JS -->
         </div>
 
-        <!-- Bottom Footer Info -->
+        <!-- Footer -->
         <footer class="pt-6 text-xs text-red-200/60 mono-font space-y-1">
             <p>© 2026 Sarawak Information Systems Sdn. Bhd.</p>
-            <p class="text-[10px] text-red-300/40">Use Arrow Keys / Remote DPAD to Navigate</p>
         </footer>
     </main>
 
-    <!-- MODAL 1: Generic Modal Target for Backend Links -->
+    <!-- Interactive Execution Modal -->
     <div id="itemModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
         <div class="glass-panel w-full max-w-lg rounded-3xl p-6 space-y-4 relative shadow-2xl border border-red-500/40">
             <button onclick="closeModal('itemModal')" data-focusable="true" class="absolute top-4 right-4 w-9 h-9 bg-red-950 hover:bg-red-800 rounded-full flex items-center justify-center text-white border border-red-500/40">
@@ -253,7 +230,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: Customization / Config Modal -->
+    <!-- Settings & Customization Modal -->
     <div id="configModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
         <div class="glass-panel w-full max-w-lg rounded-3xl p-6 space-y-4 relative shadow-2xl border border-red-500/50 max-h-[90vh] overflow-y-auto">
             <button onclick="toggleConfigModal(false)" data-focusable="true" class="absolute top-4 right-4 w-9 h-9 bg-red-950 hover:bg-red-800 rounded-full flex items-center justify-center text-white border border-red-500/40">
@@ -262,7 +239,7 @@
 
             <h3 class="font-extrabold text-xl text-white flex items-center gap-2">
                 <i class="fa-solid fa-sliders text-red-400"></i>
-                Customize Digital Hub
+                Customize Portal Settings
             </h3>
 
             <form onsubmit="saveConfiguration(event)" class="space-y-4 text-xs font-sans text-left">
@@ -275,7 +252,7 @@
                     <input type="text" id="cfgTagline" class="w-full bg-black/60 border border-red-800 rounded-xl px-3 py-2 text-white focus:border-red-500 focus:outline-none">
                 </div>
                 <div>
-                    <label class="block text-red-200 font-semibold mb-1">Logo Image Path / URL</label>
+                    <label class="block text-red-200 font-semibold mb-1">Logo URL / Image Path</label>
                     <div class="flex items-center gap-2">
                         <input type="text" id="cfgAvatar" placeholder="logo.png" class="flex-grow bg-black/60 border border-red-800 rounded-xl px-3 py-2 text-white focus:border-red-500 focus:outline-none">
                         <label data-focusable="true" class="px-3 py-2 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white rounded-xl cursor-pointer text-xs font-semibold whitespace-nowrap flex items-center gap-1.5 shadow-md">
@@ -286,9 +263,9 @@
                 </div>
 
                 <div class="pt-2 border-t border-red-900/60">
-                    <label class="block text-red-200 font-semibold mb-2">Manage Backend Link Configurations</label>
+                    <label class="block text-red-200 font-semibold mb-2">Manage Module Links</label>
                     <div id="linksConfigList" class="space-y-2">
-                        <!-- Dynamically populated link editor rows -->
+                        <!-- Populated dynamically -->
                     </div>
                 </div>
 
@@ -304,51 +281,46 @@
         </div>
     </div>
 
-    <!-- Notification Toast Box -->
+    <!-- Notification Toast -->
     <div id="toast" class="fixed bottom-6 z-50 hidden bg-red-950 border border-red-500/80 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 text-xs font-mono">
         <i class="fa-solid fa-circle-check text-red-400 text-lg"></i>
-        <span id="toastMsg">Action updated successfully.</span>
+        <span id="toastMsg">Action updated.</span>
     </div>
 
-    <!-- Application Logic & Interactive Canvas Engine -->
+    <!-- Core Script -->
     <script>
-        // Updated Default Configuration Data Model
         const DEFAULT_DATA = {
             title: "Sarawak Information Systems (SAINS)",
             tagline: "Digital Partners For Life",
             avatarUrl: "logo.png",
-            buildingUrl: "",
             socials: [
                 { name: "Facebook", icon: "fa-brands fa-facebook", url: "https://www.facebook.com/sainssarawak" },
                 { name: "Instagram", icon: "fa-brands fa-instagram", url: "https://www.instagram.com/sainssarawak" },
-                { name: "Globe", icon: "fa-solid fa-globe", url: "https://www.sains.com.my" }
+                { name: "Website", icon: "fa-solid fa-globe", url: "https://www.sains.com.my" }
             ],
             links: [
-                { id: "holobox", title: "Holobox (interactive AI Assistance)", url: "#holobox-backend-link" },
-                { id: "s-nexus", title: "S-Nexus", url: "#s-nexus-backend-link" },
-                { id: "sovereign-ai", title: "Sovereign AI Infrastructure", url: "#sovereign-ai-backend-link" },
-                { id: "future-sarawak-net", title: "The Future Sarawak Net", url: "#future-sarawak-net-backend-link" },
-                { id: "unity-iot", title: "Unity IoT Platform", url: "#unity-iot-backend-link" },
-                { id: "neptune-studio", title: "Neptune Studio", url: "#neptune-studio-backend-link" }
+                { id: "holobox", title: "Holobox (interactive AI Assistance)", url: "#holobox-backend" },
+                { id: "s-nexus", title: "S-Nexus", url: "#snexus-backend" },
+                { id: "sovereign-ai", title: "Sovereign AI Infrastructure", url: "#sovereign-ai-backend" },
+                { id: "future-sarawak-net", title: "The Future Sarawak Net", url: "#future-sarawak-net-backend" },
+                { id: "unity-iot", title: "Unity IoT Platform", url: "#unity-iot-backend" },
+                { id: "neptune-studio", title: "Neptune Studio", url: "#neptune-studio-backend" }
             ]
         };
 
         let currentConfig = JSON.parse(localStorage.getItem('sains_hub_config')) || DEFAULT_DATA;
         let currentFocusIndex = 0;
 
-        // Initialize App on DOM Load
         window.onload = function() {
             renderHubContent();
-            initAiDatabaseCanvasAnimation();
-            initKeyboardDpadNavigation();
+            initAiCanvasAnimation();
+            initKeyboardNavigation();
         };
 
-        // Render UI Elements based on configuration state
         function renderHubContent() {
             document.getElementById('displayTitle').innerText = currentConfig.title;
             document.getElementById('displayTagline').innerText = currentConfig.tagline;
 
-            // Avatar Handling
             const avatarImg = document.getElementById('displayAvatar');
             const svgFallback = document.getElementById('svgLogoFallback');
             if (currentConfig.avatarUrl && currentConfig.avatarUrl.trim() !== '') {
@@ -360,7 +332,6 @@
                 svgFallback.classList.remove('hidden');
             }
 
-            // Render Social Icons Bar
             const socialContainer = document.getElementById('socialContainer');
             socialContainer.innerHTML = currentConfig.socials.map(s => `
                 <a href="${s.url}" target="_blank" data-focusable="true" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-red-300/30 flex items-center justify-center text-white transition-all shadow-md">
@@ -368,15 +339,12 @@
                 </a>
             `).join('');
 
-            // Render Links Buttons Container (Clean text-only version with hidden backend URLs)
             const linksContainer = document.getElementById('linksContainer');
-            linksContainer.innerHTML = currentConfig.links.map(link => {
-                return `
-                    <button onclick="handleLinkExecution('${link.title}', '${link.url}')" data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center group">
-                        <h3 class="font-extrabold text-sm sm:text-base tracking-wide tv-btn-text leading-snug">${link.title}</h3>
-                    </button>
-                `;
-            }).join('');
+            linksContainer.innerHTML = currentConfig.links.map(link => `
+                <button onclick="handleLinkExecution('${link.title}', '${link.url}')" data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center group">
+                    <h3 class="font-extrabold text-sm sm:text-base tracking-wide leading-snug">${link.title}</h3>
+                </button>
+            `).join('');
 
             updateFocusables();
         }
@@ -391,7 +359,7 @@
             if (!file) return;
 
             if (file.size > 3 * 1024 * 1024) {
-                showToast("File too large. Please select an image under 3MB.");
+                showToast("File size must be under 3MB.");
                 return;
             }
 
@@ -405,18 +373,17 @@
                 if (cfgAvatarInput) cfgAvatarInput.value = dataUrl;
 
                 renderHubContent();
-                showToast("Logo image uploaded successfully!");
+                showToast("Logo updated successfully!");
             };
             reader.readAsDataURL(file);
         }
 
-        // Backend execution handler for button clicks
         function handleLinkExecution(title, targetUrl) {
             if (targetUrl && !targetUrl.startsWith('#')) {
                 window.open(targetUrl, '_blank');
             } else {
                 document.getElementById('modalTitle').innerText = title;
-                document.getElementById('modalContent').innerText = `// Routing internal backend request to: ${targetUrl}`;
+                document.getElementById('modalContent').innerText = `// Executing backend service request for: ${title}\n// Target Endpoint: ${targetUrl}`;
                 openModal('itemModal');
             }
         }
@@ -439,8 +406,8 @@
                 const linksList = document.getElementById('linksConfigList');
                 linksList.innerHTML = currentConfig.links.map((link, idx) => `
                     <div class="space-y-1 p-2 bg-black/40 rounded-xl border border-red-900/40">
-                        <input type="text" value="${link.title}" onchange="updateLinkTitle(${idx}, this.value)" placeholder="Title" class="w-full bg-black/60 border border-red-800 rounded-lg px-2 py-1 text-white text-xs mb-1">
-                        <input type="text" value="${link.url}" onchange="updateLinkUrl(${idx}, this.value)" placeholder="Backend Link Target" class="w-full bg-black/60 border border-red-800 rounded-lg px-2 py-1 text-white text-xs">
+                        <input type="text" value="${link.title}" onchange="updateLinkTitle(${idx}, this.value)" placeholder="Box Title" class="w-full bg-black/60 border border-red-800 rounded-lg px-2 py-1 text-white text-xs mb-1">
+                        <input type="text" value="${link.url}" onchange="updateLinkUrl(${idx}, this.value)" placeholder="Target Link / Endpoint" class="w-full bg-black/60 border border-red-800 rounded-lg px-2 py-1 text-white text-xs">
                     </div>
                 `).join('');
 
@@ -475,7 +442,7 @@
             localStorage.removeItem('sains_hub_config');
             renderHubContent();
             toggleConfigModal(false);
-            showToast("Reset to default configuration.");
+            showToast("Reset to standard defaults.");
         }
 
         function showToast(msg) {
@@ -485,8 +452,7 @@
             setTimeout(() => toast.classList.add('hidden'), 3000);
         }
 
-        // Background Animation Engine
-        function initAiDatabaseCanvasAnimation() {
+        function initAiCanvasAnimation() {
             const canvas = document.getElementById('aiDatabaseCanvas');
             const ctx = canvas.getContext('2d');
 
@@ -556,14 +522,13 @@
             animate();
         }
 
-        // Smart TV DPAD & Keyboard Navigation
         let focusables = [];
 
         function updateFocusables() {
             focusables = Array.from(document.querySelectorAll('[data-focusable="true"]:not(.hidden)'));
         }
 
-        function initKeyboardDpadNavigation() {
+        function initKeyboardNavigation() {
             document.addEventListener('keydown', function(e) {
                 updateFocusables();
                 if (focusables.length === 0) return;
