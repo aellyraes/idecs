@@ -95,7 +95,7 @@
             background-color: #ffffff;
         }
 
-        /* CRITICAL: TV Remote / DPAD Focus Visual Highlights - Soft Dark Theme */
+        /* TV Remote / DPAD Focus Visual Highlights */
         [data-focusable="true"]:focus,
         [data-focusable="true"].remote-focus {
             outline: 3px solid #000000 !important;
@@ -153,25 +153,12 @@
         <img id="displayBuildingImg" src="" alt="SAINS Building" class="max-h-[70vh] w-auto object-contain transition-all duration-700 hidden filter drop-shadow-[0_0_25px_rgba(255,51,68,0.4)]">
     </div>
 
-    <!-- Top Admin Settings Button (Icon Only) -->
-    <div class="fixed top-4 right-4 z-40">
-        <button id="openConfigBtn" 
-                data-focusable="true" 
-                onclick="toggleConfigModal(true)" 
-                title="Customize Hub Settings"
-                aria-label="Customize Hub Settings"
-                class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white font-bold w-11 h-11 rounded-full shadow-2xl flex items-center justify-center border border-red-300/40 backdrop-blur-md transition-all">
-            <i class="fa-solid fa-sliders text-white text-base"></i>
-        </button>
-    </div>
-
     <!-- Main Link-in-Bio / Smart TV Container -->
     <main class="w-full max-w-md tv-container mx-auto flex flex-col items-center text-center space-y-6 my-auto pt-4 pb-16 relative z-10">
         
-        <!-- Logo Container - Squircle Frame (With Click-to-Upload) -->
-        <div class="relative group mx-auto mb-1 cursor-pointer" onclick="document.getElementById('directLogoInput').click()" title="Click to Upload & Change Logo" data-focusable="true">
-            <input type="file" id="directLogoInput" accept="image/*" class="hidden" onchange="handleLogoFileUpload(event)">
-            <div class="absolute -inset-1 bg-gradient-to-r from-red-500 via-rose-500 to-amber-500 rounded-3xl blur-md opacity-60 group-hover:opacity-100 transition duration-500"></div>
+        <!-- Logo Container - Squircle Frame -->
+        <div class="relative group mx-auto mb-1" data-focusable="true">
+            <div class="absolute -inset-1 bg-gradient-to-r from-red-500 via-rose-500 to-amber-500 rounded-3xl blur-md opacity-60"></div>
             <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl overflow-hidden border-2 border-red-200/60 bg-white/95 backdrop-blur-md flex items-center justify-center p-4 shadow-2xl">
                 <!-- Fallback Vector SAINS Logo -->
                 <div id="svgLogoFallback" class="w-full h-full flex items-center justify-center text-slate-900">
@@ -192,12 +179,6 @@
                     </svg>
                 </div>
                 <img id="displayAvatar" src="" alt="SAINS Logo" class="w-full h-full object-contain p-1 rounded-2xl hidden" onerror="handleAvatarError()">
-                
-                <!-- Hover Upload Badge -->
-                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white p-2 text-center rounded-3xl">
-                    <i class="fa-solid fa-camera text-2xl mb-1 text-red-400"></i>
-                    <span class="text-[11px] font-bold">Upload Logo</span>
-                </div>
             </div>
         </div>
 
@@ -320,78 +301,13 @@
         </div>
     </div>
 
-    <!-- MODAL 3: Customization / Config Modal -->
-    <div id="configModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 space-y-4 relative shadow-2xl border border-red-500/50 max-h-[90vh] overflow-y-auto">
-            <button onclick="toggleConfigModal(false)" data-focusable="true" class="absolute top-4 right-4 w-9 h-9 bg-red-950 hover:bg-red-800 rounded-full flex items-center justify-center text-white border border-red-500/40">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <h3 class="font-extrabold text-xl text-white flex items-center gap-2">
-                <i class="fa-solid fa-sliders text-red-400"></i>
-                Customize Digital Hub
-            </h3>
-            <p class="text-xs text-red-200/80">Configure branding header, building background layer, and quick links.</p>
-
-            <form onsubmit="saveConfiguration(event)" class="space-y-4 text-xs font-sans text-left">
-                <div>
-                    <label class="block text-red-200 font-semibold mb-1">Company Title</label>
-                    <input type="text" id="cfgTitle" class="w-full bg-black/60 border border-red-800 rounded-xl px-3 py-2 text-white focus:border-red-500 focus:outline-none">
-                </div>
-                <div>
-                    <label class="block text-red-200 font-semibold mb-1">Tagline</label>
-                    <input type="text" id="cfgTagline" class="w-full bg-black/60 border border-red-800 rounded-xl px-3 py-2 text-white focus:border-red-500 focus:outline-none">
-                </div>
-                <div>
-                    <label class="block text-red-200 font-semibold mb-1">Logo / Avatar Image</label>
-                    <div class="flex items-center gap-2">
-                        <input type="text" id="cfgAvatar" placeholder="Image URL or upload below..." class="flex-grow bg-black/60 border border-red-800 rounded-xl px-3 py-2 text-white focus:border-red-500 focus:outline-none">
-                        <label data-focusable="true" class="px-3 py-2 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white rounded-xl cursor-pointer text-xs font-semibold whitespace-nowrap flex items-center gap-1.5 shadow-md">
-                            <i class="fa-solid fa-upload"></i> Upload
-                            <input type="file" accept="image/*" class="hidden" onchange="handleLogoFileUpload(event)">
-                        </label>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-red-200 font-semibold mb-1">SAINS Building Overlay Image URL (Optional)</label>
-                    <input type="text" id="cfgBuilding" placeholder="https://example.com/sains-building.png" class="w-full bg-black/60 border border-red-800 rounded-xl px-3 py-2 text-white focus:border-red-500 focus:outline-none">
-                </div>
-
-                <div class="pt-2 border-t border-red-900/60">
-                    <label class="block text-red-200 font-semibold mb-2">Manage Hub Buttons</label>
-                    <div id="linksConfigList" class="space-y-2">
-                        <!-- Dynamically populated link editor rows -->
-                    </div>
-                    <button type="button" onclick="addNewLinkRow()" data-focusable="true" class="mt-2 text-xs text-red-300 hover:text-white font-bold flex items-center gap-1">
-                        <i class="fa-solid fa-plus-circle"></i> Add New Link Button
-                    </button>
-                </div>
-
-                <div class="pt-4 flex items-center justify-between">
-                    <button type="button" onclick="resetDefaults()" data-focusable="true" class="px-4 py-2 bg-slate-900 text-red-300 border border-red-800 rounded-xl hover:bg-slate-800">
-                        Reset Defaults
-                    </button>
-                    <button type="submit" data-focusable="true" class="px-6 py-2.5 bg-gradient-to-r from-red-600 to-red-800 text-white font-bold rounded-xl shadow-lg hover:from-red-500 hover:to-red-700">
-                        Save Changes
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Notification Toast Box -->
-    <div id="toast" class="fixed bottom-6 z-50 hidden bg-red-950 border border-red-500/80 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 text-xs font-mono">
-        <i class="fa-solid fa-circle-check text-red-400 text-lg"></i>
-        <span id="toastMsg">Action updated successfully.</span>
-    </div>
-
     <!-- Application Logic & Interactive Canvas Engine -->
     <script>
-        // Default Configuration Data Model
+        // EDIT YOUR PERMANENT HUB CONTENT HERE
         const DEFAULT_DATA = {
             title: "Sarawak Information Systems (SAINS)",
-            tagline: "Driving Digital Transformation, AI Solutions & Enterprise Database Systems",
-            avatarUrl: "",
+            tagline: "Digital Partners For Life",
+            avatarUrl: "", // Insert direct image URL here if you have a custom logo link
             buildingUrl: "",
             socials: [
                 { name: "Facebook", icon: "fa-brands fa-facebook", url: "https://www.facebook.com/sainssarawak" },
@@ -406,7 +322,8 @@
             ]
         };
 
-        let currentConfig = JSON.parse(localStorage.getItem('sains_hub_config')) || DEFAULT_DATA;
+        // Always read directly from DEFAULT_DATA to serve all visitors identically
+        let currentConfig = DEFAULT_DATA;
         let currentFocusIndex = 0;
 
         // Initialize App on DOM Load
@@ -450,7 +367,7 @@
                 </a>
             `).join('');
 
-            // Render Links Buttons Container (Clean text-only version)
+            // Render Links Buttons Container
             const linksContainer = document.getElementById('linksContainer');
             linksContainer.innerHTML = currentConfig.links.map(link => {
                 const clickHandler = link.type === 'modal' ? `onclick="openModal('${link.modalId}')"` : `onclick="handleLinkClick('${link.url}')"`;
@@ -468,30 +385,6 @@
         function handleAvatarError() {
             document.getElementById('displayAvatar').classList.add('hidden');
             document.getElementById('svgLogoFallback').classList.remove('hidden');
-        }
-
-        function handleLogoFileUpload(event) {
-            const file = event.target.files && event.target.files[0];
-            if (!file) return;
-
-            if (file.size > 3 * 1024 * 1024) {
-                showToast("File too large. Please select an image under 3MB.");
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const dataUrl = e.target.result;
-                currentConfig.avatarUrl = dataUrl;
-                localStorage.setItem('sains_hub_config', JSON.stringify(currentConfig));
-                
-                const cfgAvatarInput = document.getElementById('cfgAvatar');
-                if (cfgAvatarInput) cfgAvatarInput.value = dataUrl;
-
-                renderHubContent();
-                showToast("Logo image uploaded successfully!");
-            };
-            reader.readAsDataURL(file);
         }
 
         function handleLinkClick(url) {
@@ -584,7 +477,6 @@
                 if (focusables.length === 0) return;
 
                 if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter', 'Escape'].includes(e.key)) {
-                    // Prevent page scroll on arrows
                     if (e.key !== 'Escape') e.preventDefault();
                 }
 
@@ -599,7 +491,6 @@
                 } else if (e.key === 'Escape') {
                     closeModal('aiSandboxModal');
                     closeModal('solutionsModal');
-                    toggleConfigModal(false);
                 }
             });
         }
@@ -658,84 +549,6 @@
         function closeModal(id) {
             document.getElementById(id).classList.add('hidden');
             setTimeout(updateFocusables, 100);
-        }
-
-        // Config Modal Functionality
-        function toggleConfigModal(show) {
-            const modal = document.getElementById('configModal');
-            if (show) {
-                document.getElementById('cfgTitle').value = currentConfig.title;
-                document.getElementById('cfgTagline').value = currentConfig.tagline;
-                document.getElementById('cfgAvatar').value = currentConfig.avatarUrl || '';
-                document.getElementById('cfgBuilding').value = currentConfig.buildingUrl || '';
-                renderConfigLinksList();
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
-            setTimeout(updateFocusables, 100);
-        }
-
-        function renderConfigLinksList() {
-            const container = document.getElementById('linksConfigList');
-            container.innerHTML = currentConfig.links.map((link, idx) => `
-                <div class="flex items-center space-x-2 bg-black/40 p-2 rounded-xl border border-red-900/60">
-                    <input type="text" value="${link.title}" onchange="updateConfigLink(${idx}, 'title', this.value)" placeholder="Button Title" class="flex-grow bg-slate-900 border border-red-800 rounded px-2 py-1 text-white">
-                    <input type="text" value="${link.url || ''}" onchange="updateConfigLink(${idx}, 'url', this.value)" placeholder="URL / Action" class="w-28 bg-slate-900 border border-red-800 rounded px-2 py-1 text-white">
-                    <button type="button" onclick="removeLinkRow(${idx})" class="text-red-400 hover:text-red-200 px-2 py-1">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        function updateConfigLink(idx, field, value) {
-            currentConfig.links[idx][field] = value;
-        }
-
-        function addNewLinkRow() {
-            currentConfig.links.push({
-                id: 'custom-' + Date.now(),
-                title: 'New Service Link',
-                subtitle: 'Custom description',
-                icon: 'fa-solid fa-link',
-                url: 'https://www.sains.com.my',
-                type: 'external'
-            });
-            renderConfigLinksList();
-        }
-
-        function removeLinkRow(idx) {
-            currentConfig.links.splice(idx, 1);
-            renderConfigLinksList();
-        }
-
-        function saveConfiguration(e) {
-            e.preventDefault();
-            currentConfig.title = document.getElementById('cfgTitle').value;
-            currentConfig.tagline = document.getElementById('cfgTagline').value;
-            currentConfig.avatarUrl = document.getElementById('cfgAvatar').value;
-            currentConfig.buildingUrl = document.getElementById('cfgBuilding').value;
-
-            localStorage.setItem('sains_hub_config', JSON.stringify(currentConfig));
-            renderHubContent();
-            toggleConfigModal(false);
-            showToast("Settings saved successfully!");
-        }
-
-        function resetDefaults() {
-            currentConfig = JSON.parse(JSON.stringify(DEFAULT_DATA));
-            localStorage.removeItem('sains_hub_config');
-            renderHubContent();
-            toggleConfigModal(false);
-            showToast("Reset to default configuration.");
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('hidden'), 3000);
         }
     </script>
 </body>
