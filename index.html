@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SAINS</title>
+    <title>SAINS Digital Hub</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons CDN -->
@@ -19,7 +19,6 @@
             --btn-bg: #ffffff;
             --btn-text: #800000;
             --btn-border: #ff3344;
-            --neon-gold: #ffd700;
         }
 
         body {
@@ -32,11 +31,8 @@
             -webkit-user-select: none;
         }
 
-        .mono-font {
-            font-family: 'Fira Code', monospace;
-        }
+        .mono-font { font-family: 'Fira Code', monospace; }
 
-        /* Tech Cyber Grid Background Overlay */
         .tech-grid {
             background-size: 50px 50px;
             background-image: 
@@ -50,43 +46,19 @@
             100% { background-position: 50px 50px; }
         }
 
-        /* Canvas for AI & Database Animations */
         #aiDatabaseCanvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 1;
         }
 
-        /* Sleek High-Contrast Action Buttons */
         .beacons-btn-red {
             background-color: var(--btn-bg);
             color: var(--btn-text);
             border: 2px solid var(--btn-border);
             box-shadow: 0px 6px 0px rgba(30, 0, 0, 0.8), 0 0 15px rgba(255, 51, 68, 0.3);
             transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease, background-color 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            outline: none;
-        }
-
-        .beacons-btn-red::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
-            transform: rotate(45deg) translateY(-100%);
-            transition: transform 0.8s ease-in-out;
-        }
-
-        .beacons-btn-red:hover::before {
-            transform: rotate(45deg) translateY(100%);
+            position: relative; overflow: hidden; outline: none;
         }
 
         .beacons-btn-red:hover {
@@ -95,250 +67,207 @@
             background-color: #ffffff;
         }
 
-        /* TV Remote / DPAD Focus Visual Highlights */
         [data-focusable="true"]:focus,
         [data-focusable="true"].remote-focus {
-            outline: 3px solid #000000 !important;
+            outline: 3px solid #ffd700 !important;
             outline-offset: 3px !important;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
             transform: scale(1.03) translateY(-2px) !important;
             z-index: 30 !important;
-            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease, outline 0.35s ease;
         }
 
-        /* Glassmorphism Card Overlay */
         .glass-panel {
-            background: rgba(30, 0, 5, 0.82);
+            background: rgba(30, 0, 5, 0.88);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 100, 100, 0.3);
         }
 
-        /* TV Safe margins for 10ft Smart TV viewing */
-        @media (min-width: 1280px) {
-            .tv-container {
-                max-width: 580px;
-                padding-top: 2rem;
-                padding-bottom: 4rem;
-            }
-            .tv-btn-text {
-                font-size: 1.15rem;
-                letter-spacing: 0.05em;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #2a0000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ff3344;
-            border-radius: 4px;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #2a0000; }
+        ::-webkit-scrollbar-thumb { background: #ff3344; border-radius: 4px; }
     </style>
 </head>
 <body class="relative flex flex-col justify-between items-center min-h-screen px-4 py-6 selection:bg-red-500 selection:text-white">
 
-    <!-- AI & Database Canvas Animation Overlay -->
+    <!-- Canvas Animation -->
     <canvas id="aiDatabaseCanvas"></canvas>
-
-    <!-- Animated Tech Grid Overlay -->
     <div class="fixed inset-0 tech-grid pointer-events-none z-0 opacity-40"></div>
 
-    <!-- SAINS Building Transparent Overlay Layer -->
-    <div id="buildingLayerContainer" class="fixed inset-0 pointer-events-none z-0 flex items-end justify-center overflow-hidden opacity-30">
-        <img id="displayBuildingImg" src="" alt="SAINS Building" class="max-h-[70vh] w-auto object-contain transition-all duration-700 hidden filter drop-shadow-[0_0_25px_rgba(255,51,68,0.4)]">
+    <!-- Admin Settings Gear Button (Top-Right) -->
+    <div class="fixed top-4 right-4 z-40">
+        <button id="openConfigBtn" onclick="openModal('adminConfigModal')" data-focusable="true" class="w-11 h-11 bg-red-950/80 hover:bg-red-800/90 text-white rounded-full flex items-center justify-center border border-red-500/50 shadow-xl backdrop-blur-md transition-all">
+            <i class="fa-solid fa-gear text-lg"></i>
+        </button>
     </div>
 
-    <!-- Main Link-in-Bio / Smart TV Container -->
-    <main class="w-full max-w-md tv-container mx-auto flex flex-col items-center text-center space-y-6 my-auto pt-4 pb-16 relative z-10">
+    <!-- Main Content Container -->
+    <main class="w-full max-w-md mx-auto flex flex-col items-center text-center space-y-6 my-auto pt-4 pb-16 relative z-10">
         
-        <!-- Logo Container - Squircle Frame -->
+        <!-- Logo -->
         <div class="relative group mx-auto mb-1" data-focusable="true">
             <div class="absolute -inset-1 bg-gradient-to-r from-red-500 via-rose-500 to-amber-500 rounded-3xl blur-md opacity-60"></div>
             <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl overflow-hidden border-2 border-red-200/60 bg-white/95 backdrop-blur-md flex items-center justify-center p-4 shadow-2xl">
-                <!-- Fallback Vector SAINS Logo -->
                 <div id="svgLogoFallback" class="w-full h-full flex items-center justify-center text-slate-900">
                     <svg class="w-full h-full" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g transform="translate(18, 8) scale(0.72)">
                             <path d="M 45 5 C 20 5 5 25 5 50 C 5 75 25 95 50 95 C 65 95 75 85 85 70 C 75 55 65 45 50 45 C 35 45 25 55 25 65 C 25 72 30 78 40 78 C 30 78 20 70 20 55 C 20 35 35 20 50 20 C 65 20 75 35 85 50 C 95 65 105 80 120 80 C 135 80 145 65 145 45 C 145 20 125 5 100 5 C 80 5 70 20 60 35 C 70 45 80 55 95 55 C 110 55 120 45 120 35 C 120 28 115 22 105 22 C 115 22 125 30 125 45 C 125 60 115 70 100 70 C 85 70 75 55 65 40 C 55 20 45 5 45 5 Z" fill="url(#sainsRedGrad)"/>
-                            <path d="M 35 30 C 25 40 20 50 20 60 C 20 50 30 35 45 25 C 38 25 35 28 35 30 Z" fill="#1a1a1a"/>
                             <defs>
                                 <linearGradient id="sainsRedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" stop-color="#e60012"/>
-                                    <stop offset="50%" stop-color="#ff3344"/>
                                     <stop offset="100%" stop-color="#800000"/>
                                 </linearGradient>
                             </defs>
                         </g>
-                        <text x="70" y="118" font-family="'Inter', sans-serif" font-weight="900" font-size="24" fill="#0d0d0d" text-anchor="middle" letter-spacing="-1">sains</text>
-                        <ellipse cx="103" cy="100" rx="4" ry="2.8" fill="#e60012"/>
+                        <text x="70" y="118" font-family="'Inter', sans-serif" font-weight="900" font-size="24" fill="#0d0d0d" text-anchor="middle">sains</text>
                     </svg>
                 </div>
-                <img id="displayAvatar" src="" alt="SAINS Logo" class="w-full h-full object-contain p-1 rounded-2xl hidden" onerror="handleAvatarError()">
+                <img id="displayAvatar" src="" alt="Logo" class="w-full h-full object-contain p-1 rounded-2xl hidden" onerror="handleAvatarError()">
             </div>
         </div>
 
-        <!-- Company Header Details -->
+        <!-- Title & Tagline -->
         <div class="space-y-2 px-2">
-            <h1 id="displayTitle" class="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white drop-shadow-md uppercase">
-                Sarawak Information Systems (SAINS)
-            </h1>
-            <p id="displayTagline" class="text-xs sm:text-sm text-red-100/90 leading-relaxed pt-1 max-w-sm mx-auto font-light">
-                Digital Partners For Life 
-            </p>
+            <h1 id="displayTitle" class="text-xl sm:text-2xl font-extrabold tracking-tight text-white uppercase">Loading...</h1>
+            <p id="displayTagline" class="text-xs sm:text-sm text-red-100/90 max-w-sm mx-auto font-light"></p>
         </div>
 
-        <!-- Social Icons Bar -->
-        <div id="socialContainer" class="flex items-center justify-center gap-4 text-xl sm:text-2xl pt-1">
-            <!-- Social links dynamically populated via JavaScript -->
-        </div>
+        <!-- Social Icons -->
+        <div id="socialContainer" class="flex items-center justify-center gap-4 text-xl pt-1"></div>
 
-        <!-- Dynamic Action Buttons (DPAD Focusable) -->
-        <div id="linksContainer" class="w-full space-y-4 pt-2 px-2">
-            <!-- Buttons dynamically generated -->
-        </div>
+        <!-- Action Links -->
+        <div id="linksContainer" class="w-full space-y-4 pt-2 px-2"></div>
 
-        <!-- Bottom Footer Info -->
-        <footer class="pt-6 text-xs text-red-200/60 mono-font space-y-1">
+        <footer class="pt-6 text-xs text-red-200/60 mono-font">
             <p>© 2026 Sarawak Information Systems Sdn. Bhd.</p>
-            <p class="text-[10px] text-red-300/40">Use Arrow Keys / Remote DPAD to Navigate</p>
         </footer>
     </main>
 
-    <!-- MODAL 1: AI & Database Query Terminal Sandbox -->
-    <div id="aiSandboxModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 space-y-4 relative shadow-2xl border border-red-500/40">
-            <button onclick="closeModal('aiSandboxModal')" data-focusable="true" class="absolute top-4 right-4 w-9 h-9 bg-red-950 hover:bg-red-800 rounded-full flex items-center justify-center text-white border border-red-500/40">
+    <!-- ADMIN SETTINGS MODAL (Cloud Customizer) -->
+    <div id="adminConfigModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 space-y-4 relative shadow-2xl border border-red-500/40 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('adminConfigModal')" data-focusable="true" class="absolute top-4 right-4 w-9 h-9 bg-red-950 rounded-full flex items-center justify-center text-white border border-red-500/40">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-red-600/30 flex items-center justify-center text-red-400 border border-red-500/30">
-                    <i class="fa-solid fa-brain text-xl"></i>
+            <h3 class="font-bold text-lg text-white flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-red-400"></i> Edit Site Settings (Global Sync)
+            </h3>
+
+            <div class="space-y-3 text-left text-xs">
+                <div>
+                    <label class="block text-red-200 mb-1 font-bold">Site Title</label>
+                    <input type="text" id="cfgTitle" class="w-full bg-black/60 border border-red-800 rounded-xl p-2.5 text-white">
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg text-white">SAINS AI & Big Data Query Console</h3>
-                    <p class="text-xs text-red-200/80">Statewide LLM Telemetry & Predictive Engine</p>
+                    <label class="block text-red-200 mb-1 font-bold">Tagline / Subtitle</label>
+                    <input type="text" id="cfgTagline" class="w-full bg-black/60 border border-red-800 rounded-xl p-2.5 text-white">
                 </div>
-            </div>
+                <div>
+                    <label class="block text-red-200 mb-1 font-bold">Logo Image URL</label>
+                    <input type="text" id="cfgAvatarUrl" placeholder="https://..." class="w-full bg-black/60 border border-red-800 rounded-xl p-2.5 text-white">
+                </div>
 
-            <div class="bg-black/90 rounded-2xl p-4 font-mono text-xs text-emerald-400 space-y-2 border border-red-900/60 min-h-[180px] max-h-[260px] overflow-y-auto" id="terminalOutput">
-                <p class="text-slate-500">// SAINS High-Performance Enterprise DB Connected...</p>
-                <p class="text-slate-500">// Type a query or select a preset prompt to test AI inference.</p>
-            </div>
+                <hr class="border-red-900/60 my-2">
+                <p class="font-bold text-white">Custom Button Links</p>
+                
+                <div id="adminLinksEditor" class="space-y-2"></div>
 
-            <div class="flex items-center space-x-2 pt-2">
-                <input type="text" id="aiQueryPrompt" placeholder="e.g. Query Kuching river levels..." class="flex-grow bg-black/60 border border-red-800/80 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 font-mono">
-                <button onclick="executeAiQuery()" data-focusable="true" class="px-4 py-2.5 bg-gradient-to-r from-red-600 to-red-800 text-white font-bold rounded-xl text-xs hover:from-red-500 hover:to-red-700 shadow-lg">
-                    <i class="fa-solid fa-play mr-1"></i>Run
+                <button onclick="addAdminLinkRow()" type="button" class="px-3 py-1.5 bg-red-900/60 hover:bg-red-800 text-white rounded-lg text-xs font-semibold">
+                    <i class="fa-solid fa-plus mr-1"></i> Add New Link
                 </button>
             </div>
 
-            <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
-                <button onclick="presetQuery('flood')" data-focusable="true" class="px-2.5 py-1 rounded-lg bg-red-900/40 hover:bg-red-800/60 border border-red-700/50 text-red-200">
-                    <i class="fa-solid fa-water mr-1"></i>Flood Prediction
-                </button>
-                <button onclick="presetQuery('gis')" data-focusable="true" class="px-2.5 py-1 rounded-lg bg-red-900/40 hover:bg-red-800/60 border border-red-700/50 text-red-200">
-                    <i class="fa-solid fa-map-location-dot mr-1"></i>GIS Spatial Sync
-                </button>
-                <button onclick="presetQuery('pay')" data-focusable="true" class="px-2.5 py-1 rounded-lg bg-red-900/40 hover:bg-red-800/60 border border-red-700/50 text-red-200">
-                    <i class="fa-solid fa-wallet mr-1"></i>S-Pay Load
+            <div class="pt-3">
+                <button onclick="saveConfigToCloud()" id="saveBtn" class="w-full py-3 bg-gradient-to-r from-red-600 to-rose-700 text-white font-extrabold rounded-xl shadow-lg hover:from-red-500 hover:to-rose-600">
+                    <i class="fa-solid fa-cloud-arrow-up mr-2"></i> Save & Publish Changes To Everyone
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 2: E-Government Solutions Portfolio -->
-    <div id="solutionsModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-xl rounded-3xl p-6 space-y-4 relative shadow-2xl border border-red-500/40 max-h-[85vh] overflow-y-auto">
-            <button onclick="closeModal('solutionsModal')" data-focusable="true" class="absolute top-4 right-4 w-9 h-9 bg-red-950 hover:bg-red-800 rounded-full flex items-center justify-center text-white border border-red-500/40">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <h3 class="font-extrabold text-xl text-white flex items-center gap-2">
-                <i class="fa-solid fa-cubes text-red-400"></i>
-                SAINS Enterprise Solutions Suite
-            </h3>
-            <p class="text-xs text-red-200/80">Key government digital systems powering Sarawak State Agenda</p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left pt-2">
-                <div class="p-4 bg-red-950/40 rounded-2xl border border-red-800/60 hover:border-red-500/80 transition-all">
-                    <div class="w-8 h-8 rounded-lg bg-red-600/30 text-red-300 flex items-center justify-center font-bold mb-2">
-                        <i class="fa-solid fa-map-marked-alt"></i>
-                    </div>
-                    <h4 class="font-bold text-sm text-white">LASIS Geospatial</h4>
-                    <p class="text-xs text-red-200/70 mt-1">Land & survey mapping, cadastral databases, land titles and valuation engine.</p>
-                </div>
-
-                <div class="p-4 bg-red-950/40 rounded-2xl border border-red-800/60 hover:border-red-500/80 transition-all">
-                    <div class="w-8 h-8 rounded-lg bg-red-600/30 text-red-300 flex items-center justify-center font-bold mb-2">
-                        <i class="fa-solid fa-wallet"></i>
-                    </div>
-                    <h4 class="font-bold text-sm text-white">S-Pay Global Gateway</h4>
-                    <p class="text-xs text-red-200/70 mt-1">Unified e-Government fintech portal for tax payment, municipal licenses & billing.</p>
-                </div>
-
-                <div class="p-4 bg-red-950/40 rounded-2xl border border-red-800/60 hover:border-red-500/80 transition-all">
-                    <div class="w-8 h-8 rounded-lg bg-red-600/30 text-red-300 flex items-center justify-center font-bold mb-2">
-                        <i class="fa-solid fa-seedling"></i>
-                    </div>
-                    <h4 class="font-bold text-sm text-white">AgriNET Precision IoT</h4>
-                    <p class="text-xs text-red-200/70 mt-1">Smart farming sensors, micro-climate weather stations, and soil telemetry.</p>
-                </div>
-
-                <div class="p-4 bg-red-950/40 rounded-2xl border border-red-800/60 hover:border-red-500/80 transition-all">
-                    <div class="w-8 h-8 rounded-lg bg-red-600/30 text-red-300 flex items-center justify-center font-bold mb-2">
-                        <i class="fa-solid fa-cloud-shield"></i>
-                    </div>
-                    <h4 class="font-bold text-sm text-white">GovCloud & SOC Security</h4>
-                    <p class="text-xs text-red-200/70 mt-1">Sovereign private cloud infrastructure backed by 24/7 Security Operations Center.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Application Logic & Interactive Canvas Engine -->
     <script>
-        // EDIT YOUR PERMANENT HUB CONTENT HERE
-        const DEFAULT_DATA = {
+        // PASTE YOUR NPOINT.IO OR CLOUD API URL HERE BELOW:
+        const CLOUD_JSON_URL = "https://api.npoint.io/YOUR_BIN_ID";
+
+        let currentConfig = {
             title: "Sarawak Information Systems (SAINS)",
             tagline: "Digital Partners For Life",
-            avatarUrl: "", // Insert direct image URL here if you have a custom logo link
-            buildingUrl: "",
+            avatarUrl: "",
             socials: [
                 { name: "Facebook", icon: "fa-brands fa-facebook", url: "https://www.facebook.com/sainssarawak" },
                 { name: "Instagram", icon: "fa-brands fa-instagram", url: "https://www.instagram.com/sainssarawak" },
                 { name: "Globe", icon: "fa-solid fa-globe", url: "https://www.sains.com.my" }
             ],
             links: [
-                { id: "official-portal", title: "Official SAINS Portal", subtitle: "Explore products, services & corporate info", icon: "fa-solid fa-globe", url: "https://www.sains.com.my", type: "external" },
-                { id: "ai-sandbox", title: "AI & Big Data Analytics Sandbox", subtitle: "Interactive state data query console", icon: "fa-solid fa-brain", type: "modal", modalId: "aiSandboxModal" },
-                { id: "solutions-suite", title: "e-Government Systems Suite", subtitle: "LASIS, S-Pay Global, AgriNET & GovCloud", icon: "fa-solid fa-cubes", type: "modal", modalId: "solutionsModal" },
-                { id: "contact-hub", title: "Connect with Digital Tech Hub", subtitle: "Inquiries, partnerships & consultations", icon: "fa-solid fa-paper-plane", url: "mailto:corpscom@sains.com.my", type: "external" }
+                { id: "1", title: "Official SAINS Portal", url: "https://www.sains.com.my", type: "external" },
+                { id: "2", title: "Connect with Digital Tech Hub", url: "mailto:corpscom@sains.com.my", type: "external" }
             ]
         };
 
-        // Always read directly from DEFAULT_DATA to serve all visitors identically
-        let currentConfig = DEFAULT_DATA;
-        let currentFocusIndex = 0;
-
-        // Initialize App on DOM Load
-        window.onload = function() {
-            renderHubContent();
+        window.onload = async function() {
+            await loadConfigFromCloud();
             initAiDatabaseCanvasAnimation();
-            initKeyboardDpadNavigation();
         };
 
-        // Render UI Elements based on configuration state
+        async function loadConfigFromCloud() {
+            try {
+                if (CLOUD_JSON_URL.includes("YOUR_BIN_ID")) {
+                    console.log("Using local default state. Add your npoint.io API URL to enable cloud sync across all visitors.");
+                    renderHubContent();
+                    return;
+                }
+                const res = await fetch(CLOUD_JSON_URL);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.title) currentConfig = data;
+                }
+            } catch (err) {
+                console.error("Cloud load error:", err);
+            }
+            renderHubContent();
+        }
+
+        async function saveConfigToCloud() {
+            const saveBtn = document.getElementById('saveBtn');
+            saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Saving...';
+
+            currentConfig.title = document.getElementById('cfgTitle').value;
+            currentConfig.tagline = document.getElementById('cfgTagline').value;
+            currentConfig.avatarUrl = document.getElementById('cfgAvatarUrl').value;
+
+            // Read edited links
+            const linkRows = document.querySelectorAll('.admin-link-row');
+            currentConfig.links = [];
+            linkRows.forEach((row, i) => {
+                const title = row.querySelector('.link-title-input').value;
+                const url = row.querySelector('.link-url-input').value;
+                if (title) {
+                    currentConfig.links.push({ id: `link-${i}`, title, url, type: 'external' });
+                }
+            });
+
+            try {
+                if (!CLOUD_JSON_URL.includes("YOUR_BIN_ID")) {
+                    await fetch(CLOUD_JSON_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(currentConfig)
+                    });
+                }
+                renderHubContent();
+                closeModal('adminConfigModal');
+                alert('Changes saved globally! Every visitor now sees the updated site.');
+            } catch (err) {
+                alert('Error publishing changes: ' + err.message);
+            } finally {
+                saveBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-2"></i> Save & Publish Changes To Everyone';
+            }
+        }
+
         function renderHubContent() {
             document.getElementById('displayTitle').innerText = currentConfig.title;
             document.getElementById('displayTagline').innerText = currentConfig.tagline;
 
-            // Avatar Handling
             const avatarImg = document.getElementById('displayAvatar');
             const svgFallback = document.getElementById('svgLogoFallback');
             if (currentConfig.avatarUrl && currentConfig.avatarUrl.trim() !== '') {
@@ -350,36 +279,46 @@
                 svgFallback.classList.remove('hidden');
             }
 
-            // SAINS Building Overlay Handling
-            const buildingImg = document.getElementById('displayBuildingImg');
-            if (currentConfig.buildingUrl && currentConfig.buildingUrl.trim() !== '') {
-                buildingImg.src = currentConfig.buildingUrl;
-                buildingImg.classList.remove('hidden');
-            } else {
-                buildingImg.classList.add('hidden');
-            }
-
-            // Render Social Icons Bar
-            const socialContainer = document.getElementById('socialContainer');
-            socialContainer.innerHTML = currentConfig.socials.map(s => `
-                <a href="${s.url}" target="_blank" data-focusable="true" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-red-300/30 flex items-center justify-center text-white transition-all shadow-md">
+            document.getElementById('socialContainer').innerHTML = currentConfig.socials.map(s => `
+                <a href="${s.url}" target="_blank" data-focusable="true" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-red-300/30 flex items-center justify-center text-white transition-all">
                     <i class="${s.icon}"></i>
                 </a>
             `).join('');
 
-            // Render Links Buttons Container
-            const linksContainer = document.getElementById('linksContainer');
-            linksContainer.innerHTML = currentConfig.links.map(link => {
-                const clickHandler = link.type === 'modal' ? `onclick="openModal('${link.modalId}')"` : `onclick="handleLinkClick('${link.url}')"`;
-                return `
-                    <button ${clickHandler} data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center group">
-                        <h3 class="font-extrabold text-sm sm:text-base tracking-wide tv-btn-text leading-snug">${link.title}</h3>
-                    </button>
-                `;
-            }).join('');
+            document.getElementById('linksContainer').innerHTML = currentConfig.links.map(link => `
+                <button onclick="window.open('${link.url}', '_blank')" data-focusable="true" class="beacons-btn-red w-full py-3.5 px-6 rounded-2xl flex items-center justify-center text-center">
+                    <h3 class="font-extrabold text-sm sm:text-base">${link.title}</h3>
+                </button>
+            `).join('');
 
-            // Re-index focusable elements
-            updateFocusables();
+            populateAdminModalInputs();
+        }
+
+        function populateAdminModalInputs() {
+            document.getElementById('cfgTitle').value = currentConfig.title || '';
+            document.getElementById('cfgTagline').value = currentConfig.tagline || '';
+            document.getElementById('cfgAvatarUrl').value = currentConfig.avatarUrl || '';
+
+            const container = document.getElementById('adminLinksEditor');
+            container.innerHTML = currentConfig.links.map(link => `
+                <div class="admin-link-row flex gap-2 items-center">
+                    <input type="text" value="${link.title}" placeholder="Button Title" class="link-title-input w-1/2 bg-black/60 border border-red-800 rounded-lg p-2 text-white">
+                    <input type="text" value="${link.url}" placeholder="URL Destination" class="link-url-input w-1/2 bg-black/60 border border-red-800 rounded-lg p-2 text-white">
+                    <button onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-200 p-1"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function addAdminLinkRow() {
+            const container = document.getElementById('adminLinksEditor');
+            const div = document.createElement('div');
+            div.className = 'admin-link-row flex gap-2 items-center';
+            div.innerHTML = `
+                <input type="text" placeholder="Button Title" class="link-title-input w-1/2 bg-black/60 border border-red-800 rounded-lg p-2 text-white">
+                <input type="text" placeholder="URL Destination" class="link-url-input w-1/2 bg-black/60 border border-red-800 rounded-lg p-2 text-white">
+                <button onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-200 p-1"><i class="fa-solid fa-trash"></i></button>
+            `;
+            container.appendChild(div);
         }
 
         function handleAvatarError() {
@@ -387,168 +326,30 @@
             document.getElementById('svgLogoFallback').classList.remove('hidden');
         }
 
-        function handleLinkClick(url) {
-            if (url) window.open(url, '_blank');
-        }
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        // HTML5 Canvas Background Animation - AI Neural Nodes & Database Packets
         function initAiDatabaseCanvasAnimation() {
             const canvas = document.getElementById('aiDatabaseCanvas');
             const ctx = canvas.getContext('2d');
-
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resize();
-            window.addEventListener('resize', resize);
-
-            const nodes = [];
-            const nodeCount = Math.min(Math.floor(window.innerWidth / 25), 45);
-
-            for (let i = 0; i < nodeCount; i++) {
-                nodes.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.8,
-                    vy: (Math.random() - 0.5) * 0.8,
-                    radius: Math.random() * 2 + 1.5,
-                    pulse: Math.random() * Math.PI
-                });
-            }
-
+            function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+            resize(); window.addEventListener('resize', resize);
+            const nodes = Array.from({ length: 30 }, () => ({
+                x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.8, vy: (Math.random() - 0.5) * 0.8, radius: 2
+            }));
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                // Draw Connecting Network Synapses
-                for (let i = 0; i < nodes.length; i++) {
-                    for (let j = i + 1; j < nodes.length; j++) {
-                        const dx = nodes[i].x - nodes[j].x;
-                        const dy = nodes[i].y - nodes[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-
-                        if (dist < 140) {
-                            ctx.beginPath();
-                            ctx.moveTo(nodes[i].x, nodes[i].y);
-                            ctx.lineTo(nodes[j].x, nodes[j].y);
-                            ctx.strokeStyle = `rgba(255, 100, 100, ${1 - dist / 140 * 0.75})`;
-                            ctx.lineWidth = 0.8;
-                            ctx.stroke();
-                        }
-                    }
-                }
-
-                // Render Nodes
-                nodes.forEach(node => {
-                    node.x += node.vx;
-                    node.y += node.vy;
-
-                    if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
-                    if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
-
-                    node.pulse += 0.03;
-                    const r = node.radius + Math.sin(node.pulse) * 0.8;
-
-                    ctx.beginPath();
-                    ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
-                    ctx.fillStyle = '#ff3344';
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = '#ff3344';
-                    ctx.fill();
-                    ctx.shadowBlur = 0;
+                nodes.forEach(n => {
+                    n.x += n.vx; n.y += n.vy;
+                    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+                    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+                    ctx.beginPath(); ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ff3344'; ctx.fill();
                 });
-
                 requestAnimationFrame(animate);
             }
-
             animate();
-        }
-
-        // Smart TV DPAD & Keyboard Focus Controller
-        let focusables = [];
-
-        function updateFocusables() {
-            focusables = Array.from(document.querySelectorAll('[data-focusable="true"]:not(.hidden)'));
-        }
-
-        function initKeyboardDpadNavigation() {
-            document.addEventListener('keydown', function(e) {
-                updateFocusables();
-                if (focusables.length === 0) return;
-
-                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter', 'Escape'].includes(e.key)) {
-                    if (e.key !== 'Escape') e.preventDefault();
-                }
-
-                if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-                    currentFocusIndex = (currentFocusIndex + 1) % focusables.length;
-                    focusables[currentFocusIndex].focus();
-                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-                    currentFocusIndex = (currentFocusIndex - 1 + focusables.length) % focusables.length;
-                    focusables[currentFocusIndex].focus();
-                } else if (e.key === 'Enter') {
-                    if (document.activeElement) document.activeElement.click();
-                } else if (e.key === 'Escape') {
-                    closeModal('aiSandboxModal');
-                    closeModal('solutionsModal');
-                }
-            });
-        }
-
-        // AI Sandbox Query Simulation Logic
-        function executeAiQuery() {
-            const promptInput = document.getElementById('aiQueryPrompt');
-            const prompt = promptInput.value.trim();
-            if (!prompt) return;
-
-            const terminal = document.getElementById('terminalOutput');
-            const pUser = document.createElement('p');
-            pUser.className = 'text-white font-bold';
-            pUser.innerText = `> ${prompt}`;
-            terminal.appendChild(pUser);
-
-            const pThinking = document.createElement('p');
-            pThinking.className = 'text-red-400 animate-pulse';
-            pThinking.innerText = "[+] Interrogating SAINS GovCloud database clusters...";
-            terminal.appendChild(pThinking);
-            terminal.scrollTop = terminal.scrollHeight;
-
-            setTimeout(() => {
-                pThinking.remove();
-                const pReply = document.createElement('p');
-                pReply.className = 'text-emerald-300 border-l-2 border-emerald-500 pl-2 my-1';
-
-                if (prompt.toLowerCase().includes('flood') || prompt.toLowerCase().includes('water')) {
-                    pReply.innerText = "QUERY RESULT: Kuching Barrage water level currently at 2.84m [NORMAL]. 48h predicted risk low.";
-                } else if (prompt.toLowerCase().includes('pay') || prompt.toLowerCase().includes('transaction')) {
-                    pReply.innerText = "QUERY RESULT: S-Pay Global gateway processing 412 tx/sec. Average latency 18ms.";
-                } else {
-                    pReply.innerText = `QUERY RESULT for "${prompt}": Processed across 1,482 sensor nodes. Systems nominal. Confidence index 99.4%.`;
-                }
-
-                terminal.appendChild(pReply);
-                terminal.scrollTop = terminal.scrollHeight;
-                promptInput.value = '';
-            }, 1000);
-        }
-
-        function presetQuery(type) {
-            const input = document.getElementById('aiQueryPrompt');
-            if (type === 'flood') input.value = "Check Sarawak river hydrometric flood alerts";
-            else if (type === 'gis') input.value = "Fetch LASIS cadastral spatial database sync status";
-            else if (type === 'pay') input.value = "Monitor live S-Pay Global transaction throughput";
-            executeAiQuery();
-        }
-
-        // Modal Utility Handlers
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-            setTimeout(updateFocusables, 100);
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-            setTimeout(updateFocusables, 100);
         }
     </script>
 </body>
